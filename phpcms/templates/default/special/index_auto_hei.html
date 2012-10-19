@@ -1,0 +1,109 @@
+{template 'special', 'header_auto_hei'}
+<style type="text/css">
+.hidd{overflow:hidden}
+.plan-2{ padding:0 8px; text-align:center; overflow:hidden}
+.plan-2 li div.img-wrap,.plan-2 li a{ width:120px; height:100px; margin:auto}
+.zt1{width:988px; background:#fff; padding-top:15px; padding-left:10px; margin-bottom:10px;}
+.zt2{width:313px; height:311px; float:left; margin-right:10px; margin-bottom:10px; display:inline; background:#fff; overflow:hidden; padding:2px; border:1px solid #1B60AA}
+.zt2-1{height:30px; line-height:30px; padding-left:15px; overflow:hidden; background:url({IMG_PATH}zt/ztbg.gif)}
+.zt2-4{width:303px; height:102px; margin:0 5px; overflow:hidden; border-bottom:1px dashed #1B60AA}
+.zt3{width:976px; border:1px solid #1B60AA}
+.zt3-1{height:30px; line-height:30px; padding-left:15px; overflow:hidden; background:url({IMG_PATH}zt/ztbg.gif) repeat-x;}
+.zt3-2{width:300px; height:30px; float:left;}
+.zt3-3{width:69px; height:30px; float:right; display:block; background:url({IMG_PATH}zt/more.png); }
+.zt3-4{width:320px; height:auto;}
+.zt3-5{width:150px; height:130px; display:inline; margin:10px 0 0 10px;}
+.zt3-6{width:144px; height:99px; border:1px solid #666666; padding:2px;}
+.zt3-7{height:25px; line-height:25px;}
+.zt3-8{width:310px; height:30px; display:inline; overflow:hidden;}
+.zt3-9{width:230px; height:300px; display:inline; margin:0 7px; overflow:hidden}
+.zt3-10{width:224px; height:125px; border:1px solid #999999; padding:2px;}
+.zt3-11{display:block; height:30px; line-height:30px; overflow:hidden; font-weight:bold; color:#003366;}
+.zt3-12{height:139px; overflow:hidden; line-height:20px; text-indent:25px;}
+</style>
+<!--main--><table width="1000" border="0" align="center" cellpadding="0" cellspacing="0" style="background:url({IMG_PATH}zt/menu_bg.gif) repeat-x;">
+  <tr>
+    <td height="45"><div style="margin-left:20px;"><a href="http://auto.we54.com/" style="font-size:14px; font-weight:bold; color:#FFFFFF;" target="_blank">爱车频道首页</a>{loop $types $t}&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$t['url']}" style="font-size:14px; font-weight:bold; color:#FFFFFF;" target="_blank">{$t['name']}</a>{/loop}&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://bbs.we54.com/forumdisplay.php?fid=791" style="font-size:14px; font-weight:bold; color:#FFFFFF;" target="_blank">谈车论驾</a></div></td>
+  </tr>
+</table>
+<div class="main zt1">
+	<!-- 幻灯片 -->
+	<div class="zt2">
+    	<div class="FocusPic">
+        <!--num 修改过 原来是4张 现在是3张-->
+        {pc:special  action="content_list" specialid="$specialid" thumb="1" listorder="3" num="3"}
+            <div class="content" id="main-slide">
+                <div class="changeDiv">  
+                {loop $data $r}
+                    <a href="{$r['url']}" title="{str_cut($r['title'],30)}"><img src="{thumb($r['thumb'],313,311)}" alt="{$r['title']}" width="313" height="311" /></a>
+                {/loop}
+                </div>
+            </div>
+        {/pc}
+        </div>
+    </div>
+    <div class="zt2">
+        {pc:special  action="content_list" specialid="$specialid" listorder="0" num="3"}
+        {php $j=1;}
+		{loop $data $r}
+		<div class="zt2-4" {if $j==3} style="border:none;"{/if}>
+        	<div class="f14 text-c fb" style="height:32px; line-height:35px; overflow:hidden;">
+            <a href="{$r['url']}" target="_blank" style="color:#AB8E72">{str_cut($r['title'], 36, '')}</a>
+            </div>
+            <div class="f12" style="height:70px; line-height:23px; overflow:hidden;">
+            {str_cut($r['description'], 130)}
+            </div>
+        </div>
+        {php $j++;}
+		{/loop}
+        {/pc}
+    </div>
+    <div class="zt2 f14">    
+		<div class="zt2-1 f14 fb white">小编推荐</div>
+        <div style="height:130px; padding:6px; overflow:hidden;">
+        	<img src="{$thumb}" width="300" height="130">
+        </div>
+        <p style="line-height:23px; padding:4px; height:148px; overflow:hidden;">&nbsp;&nbsp;&nbsp;&nbsp;{$description}</p>
+    </div>
+	<div class="bk10"></div>
+	{$pic_data}    
+	{loop $types $t}
+    <div class="bk10"></div>
+    <div class="box zt3">    	
+    	<div class="zt3-1">
+        	<div class="zt3-2 white f14 fb">{$t['name']}</div>
+        	<a href="{$t['url']}" class="zt3-3"></a>
+        </div>
+        <div class="bk10"></div>
+        <!-- 数据循环 4条 开始 -->
+        {pc:special action="content_list" specialid="$id" typeid="$t[typeid]" thumb="1" listorder="1" num="4"}
+        {loop $data $r}
+        <div class="zt3-9 lf">
+        	<a href="{$r['url']}" target="_blank"><img src="{thumb($r['thumb'], 224, 125)}" class="zt3-10"></a>
+            <a href="{$r['url']}" target="_blank" class="zt3-11 f14 text-c">
+            {str_cut($r['title'],24,'')}            </a>
+            <div class="zt3-12 f12">
+            {$r['description']}
+            </div>
+
+      </div>
+        {/loop}
+        {/pc}
+        <!-- 数据循环 4条 结束 -->
+    </div>
+	{/loop}	
+	  <div class="bk10"></div>
+	  {if module_exists('comment')}
+      <iframe src="{APP_PATH}index.php?m=comment&c=index&a=init&commentid={id_encode("special",$id,$siteid)}&iframe=1" width="100%" height="40%" id="comment_iframe" frameborder="0" scrolling="no"></iframe>
+	  {/if}
+	  <script language='javascript' src='{APP_PATH}index.php?m=formguide&c=index&a=show&formid=48&action=js'></script>
+</div>
+<script type="text/javascript"> 
+<!--
+$(function(){
+	new slide("#main-slide","cur",313,311,1);//焦点图
+	new SwapTab(".SwapTab","span",".tab-content","ul","fb");//排行TAB
+})
+//-->
+</script>
+{template 'content', 'footer'}

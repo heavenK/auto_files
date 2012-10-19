@@ -1,0 +1,31 @@
+{template 'special', 'header_auto_hei'}
+<style type="text/css">
+.hidd{overflow:hidden}
+.plan-2{ padding:0 8px; text-align:center; overflow:hidden}
+.plan-2 li div.img-wrap,.plan-2 li a{ width:120px; height:100px; margin:auto}
+.zt1{width:988px; background:#fff; padding-top:15px; padding-left:10px; border:0px solid #999999; margin-bottom:10px;}
+</style>
+
+<div class="main zt1">
+	<div class="crumbs"><a href="{$url}" style="color:#CC0000;"><strong>{$title}Ê×Ò³</strong></a> &gt; <strong>{$info[name]}</strong></div>
+    <div style="margin-bottom:10px;">
+        <div class="content">
+		{pc:special  action="content_list" specialid="$specialid" typeid="$typeid" listorder="3" page="$page" num="30"}
+            <ul class="list f14 lh26 row-2" style=" margin-left:30px;">
+			{loop $data $r}
+                <li><table width="90%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td height="32" align="left"><img src="{IMG_PATH}zt/p.gif" width="16" height="16" align="absmiddle" /> <a href="{$r['url']}" target="_blank" style="color:#000066; font-size:14px; "><strong>{str_cut($r['title'], 60)}</strong></a></td>
+  </tr>
+  <tr>
+    <td height="99" align="left" valign="top" style="font-size:12px; color:#666666;">{str_cut($r['description'], 200)}</td>
+  </tr>
+</table>
+</li>
+				{/loop}
+            </ul>
+        </div>
+		<div id="pages" class="text-c">{$pages}</div>
+    </div>
+</div> 
+{template 'content', 'footer'}

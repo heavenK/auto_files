@@ -1,0 +1,216 @@
+{template "content","header"}
+<!--main-->
+<div class="main">
+{pc:get sql="SELECT catid FROM v9_category WHERE parentid = '$catid' and catname ='基本信息'" return="data2"}
+{loop $data2 $r2}
+{php $jbid = $r2[catid]}
+{/loop}
+{/pc}
+{pc:get sql="SELECT catid FROM v9_category WHERE parentid = '$catid' and catname ='店内动态'" return="data2"}
+{loop $data2 $r2}
+{php $dnid = $r2[catid]}
+{/loop}
+{/pc}
+{pc:get sql="SELECT catid FROM v9_category WHERE parentid = '$catid' and catname ='专家评测'" return="data2"}
+{loop $data2 $r2}
+{php $zjid = $r2[catid]}
+{/loop}
+{/pc}
+{pc:get sql="SELECT catid FROM v9_category WHERE parentid = '$catid' and catname ='推荐车型'" return="data2"}
+{loop $data2 $r2}
+{php $tjid = $r2[catid]}
+{/loop}
+{/pc}
+{pc:get sql="SELECT a.title,b.* FROM v9_jxs_jibenxinxi as a left join v9_jxs_jibenxinxi_data as b on a.id=b.id where a.catid='$jbid'" num="1" return="jibenxinxi"}
+{loop $jibenxinxi $k $r}
+{loop $r $j $c}
+{php $jiben[$j] = $c}
+{/loop}
+{/loop}
+{/pc}
+	<!-- 经销商banner 开始 -->
+	<div class="jx-banner hidd">
+		<img src="{$image}">
+    </div>
+    <!-- 经销商banner 结束 -->
+    <div class="bk15"></div>
+    {php $ditu = explode('|',$jiben[ditu]);}
+    <!-- 经销商 资讯信息 开始 -->
+    <div class="jx-news hidd">
+    	<div class="jx-hd hidd lf bor-hui">
+        	<!-- 幻灯片 开始 -->
+            <div class="jx-hd-1 hidd channel-slide lf">
+            	<!--{pc:content action="position" posid="13" catid="$catid" order="listorder DESC" thumb="1" num="4"} -->
+                {pc:content action="lists" catid="7" order="listorder DESC" thumb="1" num="4"} 
+                <div class="col-auto hidd" style=" margin:0; padding:0;z-index:0">                
+                    <ul class="photo bor-hui hidd" style="width:300px;; height:240px;">                    
+                    {loop $data $k $v}
+                    	<li><a href="{$v[url]}" target="_blank" title="{$v[title]}">
+                        <img src="{thumb($v[thumb], 294, 234)}" alt="{$v[title]}" width="294" height="234" style="padding:3px;" />
+                        </a></li>
+                    {/loop}
+                    </ul>
+                </div>
+                
+                <ul class="thumb" style="width:310px; margin-top:5px; padding-top:0;">
+                {loop $data $k $v}
+                    <li style="float:left; margin-top:0; padding-top:0;">
+                    <a href="{$v[url]}" target="_blank">
+                    <img src="{thumb($v[thumb], 70, 56)}" alt="{$v[title]}" width="70" height="56" /><div class="icon" style="background:none;"></div>
+                    </a>
+                    </li>
+                {/loop}
+                </ul>                
+                {/pc}
+            </div>
+            <!-- 幻灯片 结束 -->
+            <!-- 店内信息 开始 -->
+            <div class="jx-news-1 hidd rt f18 fb text-c">
+            	{pc:content action="position" posid="2" catid="$dnid" order="listorder DESC" num="1"}
+                {loop $data $r} <a href="{$r[url]}" target="_blank" {title_style($r[style])}>{$r['title']}</a> {/loop}
+                {/pc}
+            </div>
+            <ul class="rt jx-news-ul">
+            	{pc:content action="position" posid="17" catid="$dnid" order="listorder DESC" num="11"}
+                {loop $data $r}
+            	<li class="hidd">
+                	<span class="sp1 lf hidd"><a href="{$r[url]}" target="_blank" {title_style($r[style])}>{str_cut($r['title'],36,'')}</a></span>
+                    <span class="sp2 lf hidd">{date('Y-m-d',$r['inputtime'])}</span>
+                </li>
+                {/loop}
+                {/pc}
+            </ul>
+            <!-- 店内信息 结束 -->
+        </div>
+        <!-- 公司简介 开始 -->
+        <div class="gsjj rt">
+        	<div class="gsjj-1 hidd ">
+            	<img src="{$jiben[jxslogo]}" class="gsjj-2 lf">
+            	{$jiben['content']}
+            </div>
+        </div>
+        <!-- 公司简介 结束 -->
+    </div>
+    <!-- 经销商 资讯信息 结束 -->
+    <div class="bk15"></div>
+    <!-- 经销商 主体部分 开始 -->
+    <div class="jx-cont">
+    	<!-- 左边 开始 -->
+    	<div class="jxlf">
+        	<!-- 基本信息 开始 -->
+    		<div class="jxlf-1 bor-hui">
+            	<div class="jxlf-2 hidd"></div>
+                <div class="jxlf-3 hidd">
+                公司名称：<span class="fb lanse">{$jiben['title']}</span>
+				</div>
+                <div class="jxlf-4 hidd">
+                主营品牌：{$jiben['zycx']}<br />
+                代办服务：{$jiben['daibanfuwu']}
+                </div>
+                <div class="jxlf-4 hidd">
+                所属集团：{$jiben['suoshujituan']}<br />
+				销售电话：{$jiben['tel']}
+                </div>                
+                <div class="jxlf-4 hidd" style="border:none;">
+                <span class="sp1">店面地址：</span>
+                <span class="sp2">{$jiben['dizhi']}</span>
+                </div>
+        	</div>
+            <!-- 基本信息 结束 -->
+            <div class="bk15"></div>
+            <!-- 公司地图 开始 -->
+            <div class="jxlf-1 hidd bor-hui">
+            	<div class="jxlf-5"></div>
+                <!-- 地图 -->
+                <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+                <div class="jxlf-6 bor-hui hidd" id="container">
+                </div>
+            </div>
+            <!-- 公司地图 结束 -->
+            <div class="bk15"></div>
+            <!-- 视频 开始 -->
+            <div class="jxlf-7 hidd bor-hui">
+            	<!--{pc:content action="position" posid="2" catid="$zjid" order="listorder DESC" num="1"}-->
+                {pc:content action="position" posid="16" catid="14" order="listorder DESC" num="1"}
+                {loop $data $r}
+            	<div class="jxlf-8"></div>
+                <!-- 视频 -->
+                <div class="jxlf-9 bor-hui hidd">{$r['shipin']}</div>
+                <div class="bk3"></div>
+                <!-- 点评 -->
+                <div class="jxlf-10 hidd">
+                	<span class="sp3 hidd fb lf lh20">点评：</span>
+                    <span class="sp4 hidd rt lh20">{$r['description']}</span>
+                </div>
+                {/loop}
+                {/pc}
+            </div>
+            <!-- 视频 结束 -->
+        </div>
+        <!-- 左边 结束 -->
+        <!-- 右边 开始 -->
+        <div class="jxrt bor-hui rt hidd">
+        	<img src="{IMG_PATH}img/bg51.jpg" class="lf hidd" style="width:156px; height:57px;">
+          	<div class="bk3"></div>            
+            <ul>            	
+            	<li class="li-1">
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr align="center">
+                            <th width="107">图片</th>
+                            <th width="118">名称</th>
+                            <th width="90">厂商指导价</th>
+                            <th width="90">经销商报价</th>
+                            <th width="135">促销信息</th>
+                            <th width="80">报价时间</th>
+                        </tr>
+                    </table>
+                </li>
+                <!-- 数据循环 7条 开始 -->
+                {pc:content action="position" posid="10" catid="$tjid" order="listorder DESC" thumb="1" num="7"}
+                {loop $data $r}
+                <li>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tr align="center">
+                            <td width="107"><img src="{$r[thumb]}" style="width:103px; height:69px; padding:1px;" class="bor-hui hidd"></td>
+                            <td width="118" class="blue"><a href="{$r[url]}" target="_blank">{$r['title']}</a></td>
+                            <td width="90">{$r['changjiazhidaojia']}</td>
+                            <td width="90" class="fb f18 red">{$r['jingxiaoshangbaojia']}</td>
+                            <td width="135">优惠信息：{$r['cuxiaoxinxi']}</td>
+                            <td width="80">{date('Y-m-d',$r[updatetime])}</td>
+                        </tr>
+                    </table>
+                </li>
+                {/loop}
+                {/pc}
+            </ul>
+            <!-- 数据循环 7条 结束 -->
+        </div>
+        <!-- 右边 结束 -->
+        <!-- 广告位 -->
+        <div class="gg4 hidd rt bor-hui">
+        <script language="javascript" src="{APP_PATH}index.php?m=poster&c=index&a=show_poster&id=18"></script>
+        </div>
+    </div>
+    <!-- 经销商 主体部分 结束 -->
+</div>
+<script type="text/javascript">
+var map = new BMap.Map("container");          // 创建Map实例
+var point = new BMap.Point({$ditu[0]}, {$ditu[1]});  // 创建点坐标
+map.centerAndZoom(point,15);                  // 初始化地图,设置中心点坐标和地图级别。
+map.enableScrollWheelZoom();                  // 启用滚轮放大缩小。
+map.enableKeyboard();                         // 启用键盘操作。
+var marker = new BMap.Marker(new BMap.Point({$ditu[0]}, {$ditu[1]}));  // 创建标注
+map.addOverlay(marker); 
+
+</script>
+<script type="text/javascript">
+function ChannelSlide(Name,Class){
+	$(Name+' ul.photo li').sGallery({
+		titleObj:Name+' div.title p',
+		thumbObj:Name+' .thumb li',
+		thumbNowClass:Class
+	});
+}
+new ChannelSlide(".channel-slide","on",311,260);
+</script>
+{template "content","footer"}

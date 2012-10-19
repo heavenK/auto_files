@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+<meta name="keywords" content="{$SEO['keyword']}">
+<meta name="description" content="{$SEO['description']}">
+<link href="{CSS_PATH}reset.css" rel="stylesheet" type="text/css" />
+<link href="{CSS_PATH}default_blue.css" rel="stylesheet" type="text/css" />
+<link href="{CSS_PATH}my_css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{JS_PATH}jquery.min.js"></script>
+<script type="text/javascript" src="{JS_PATH}jquery.sgallery.js"></script>
+<script type="text/javascript" src="{JS_PATH}search_common.js"></script>
+<script type="text/javascript" src="{JS_PATH}png.js"></script>
+<script type="text/javascript" src="{JS_PATH}myjs.js"></script>
+<script type="text/javascript" src="{JS_PATH}DD_belatedPNG_0.0.8a.js"></script>
+<script>
+$(document).ready(function(){
+	$(".con").prepend('<div class="nav_ub"></div>')
+	$(".con").hover(function(){
+		$(this).children(".nav_ub").stop().animate({top:-43},300);
+		$(this).find(".pos").stop().animate({left:0},250);
+	},function(){
+		$(this).children(".nav_ub").stop().animate({top:0},300);
+		$(this).find(".pos").stop().animate({left:0},250);
+	});
+})
+
+DD_belatedPNG.fix('.ct6-0,.niu,.ct4-6,.ct4-7,.ct7-4,.ct4-8,.ct7-16,.ct1-3,background');
+</script>
+</head>
+<body>
+<!-- 新青年 导航 -->
+<div style="width:100%; height:110px; background:#fff">
+<iframe src="http://news.we54.com/plus/other_header_t.php" name="iframe1" id="ifr" width="100%" height="105px" border=0 frameborder=0 scrolling="no" allowtransparency="true" ></iframe>
+</div>
+<!-- 汽车频道 banner -->
+<div id="top_banner" class="hidd">
+	<div class="top_1">
+    	<a href="{APP_PATH}" class="bnn lf"></a>
+    	<div class="top_date white rt ib">{php echo date('Y 年 m 月 d 日');}</div>
+    </div>
+</div>
+<!-- 汽车频道 导航 开始 -->
+<div id="daohang" class="hidd">
+	<div class="con">
+        <div class="nav_u"><a class="pos" href="{APP_PATH}" target="_blank">网站首页</a></div>
+    </div>
+    <div class="con">
+    	<div class="nav_u"><a class="pos" href="{APP_PATH}#maichefang">买车坊</a></div>
+    </div>
+    <div class="con">
+    	<div class="nav_u"><a class="pos" href="http://bbs.we54.com/forumdisplay.php?fid=791" target="_blank">车师傅</a></div>
+    </div>
+    <div class="con">
+    	<div class="nav_u"><a class="pos" href="{APP_PATH}#tuangou">54团购</a></div>
+    </div>
+    <div class="con">
+    	<div class="nav_u"><a class="pos" href="{APP_PATH}html/jingxiaoshangjia/" target="_blank">经销商</a></div>
+    </div>
+    <div class="con">
+    	<div class="nav_u"><a class="pos" href="http://bbs.we54.com/forumdisplay.php?fid=791" target="_blank">车友论坛</a></div>
+    </div>
+</div>
+<!-- 汽车频道 导航 结束 -->
+<div class="bk15"></div>

@@ -1,0 +1,50 @@
+<div class="col-auto">
+    <div class="cont1_ri rt hidd">
+        <!-- 资讯右上角广告 -->
+        <div class="gg1">
+        <script language="javascript" src="{APP_PATH}caches/poster_js/15.js"></script>
+        </div>
+        <div class="bk6"></div>
+        <div id="ctc" class="ct1_qie">
+            <ul>
+                <li id="ctc1" class="cti_li1" onmouseover="ctcqh('cti_li','ctc','1')">近期关注</li>
+                <li id="ctc2" class="cti_li2" onmouseover="ctcqh('cti_li','ctc','2')">热门标签</li>
+            </ul>
+            <!-- 数据循环 8条 -->
+            <ul id="ctc1_1" style="clear:both">
+                <!-- 近期关注 -->
+                {pc:content action="lists" catid="24" order="listorder DESC" num="8"}
+                {loop $data $r}
+                <li class="ct1_con1 hidd"><a href="{$r['url']}" target="_blank" {title_style($r[style])}>{$r['title']}</a></li>
+                {/loop}
+                {/pc}
+            </ul>
+            <ul id="ctc2_2" style="clear:both; display:none;">
+                <!-- 热门标签 -->
+                {pc:content action="lists" catid="25" order="listorder DESC" num="8"}
+                {loop $data $r}
+                <li class="ct1_con1 hidd"><a href="{$r['url']}" target="_blank" {title_style($r[style])}>{$r['title']}</a></li>
+                {/loop}
+                {/pc}
+            </ul>
+        </div>
+    </div>
+    <div class="bk6"></div>
+    <div class="box hidd rt" style="background:#F3F3F3; width:204px;">
+    <span class="gray4 f14 fb" style="color:#666666; width:70px; height:30px; padding-left:15px;">独家车源</span>
+    {pc:content action="position" posid="19" catid="29" order="listorder DESC" num="3" moreinfo="1" return="data2"}
+    	{php $n=1}
+        {loop $data2 $r2}
+        {pc:get sql="SELECT modelid FROM v9_model WHERE name='$r2[dj_biaodan]'" return="ttgg"}
+        {php $tg_url="index.php?m=formguide&c=index&a=show&formid=".$ttgg[0]['modelid'];}
+        {/pc}
+        {if $n!=1}<div class="bk10"></div>{/if}
+        <a href="{$r2['url']}" target="_blank" title="{$r2[title]}">
+        <img src="{$r2['thumb']}" class="bor-hui rt" alt="{$r2[title]}" style="width:196px; height:147px; padding:4px; border-left:none; border-right:none;"/>
+        </a>
+        <div class="bk3"></div>
+        <a href="{$r2['url']}" target="_blank" class="text-c rt" style="width:200px; display:block;"><img src="{IMG_PATH}img/niu5.jpg" /></a>
+        {/loop}
+    {/pc}
+    </div>
+</div>
